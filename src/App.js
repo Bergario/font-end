@@ -1,6 +1,9 @@
-import "./App.css";
 import React, { useState, useEffect } from "react";
+import { Switch, Route } from "react-router";
+
+import "./App.css";
 import Form from "./component/Form";
+import PaymentStatus from "./component/PaymentStatus";
 
 const App = () => {
   const [transaction, setTransaction] = useState();
@@ -17,26 +20,18 @@ const App = () => {
 
   console.log(transaction);
 
-  const Data = transaction && (
-    <>
-      <p>{`Id transaksi: ${transaction.transaction_id}`}</p>
-      <p>{`Status: ${transaction.transaction_status}`}</p>
-      <p>{`Total bayar:${transaction.gross_amount}`}</p>
-      <p>{`Bank: ${transaction.va_numbers[0].bank}`}</p>
-      <p>{`Virtual Account: ${transaction.va_numbers[0].va_number}`}</p>
-    </>
-  );
-
-  console.log(Data);
-
   return (
-    <div className="App">
-      <h1>Selamat Datang!!</h1>
-      <h3>{`Detail Transaksi`}</h3>
-      {Data}
-      <button onClick={() => cekStatus()}>Refresh</button>
-      <Form />
-    </div>
+    <Switch>
+      <div className="App">
+        <h3>Shipping Detail</h3>
+        <Route path="/" exact component={Form} />
+        <Route
+          path="/payment"
+          exact
+          component={() => <PaymentStatus transaction={transaction} />}
+        />
+      </div>
+    </Switch>
   );
 };
 
