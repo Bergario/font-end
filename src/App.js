@@ -23,7 +23,6 @@ const App = () => {
   return (
     <Switch>
       <div className="App">
-        <h3>Shipping Detail</h3>
         <Route path="/" exact component={Form} />
         <Route
           path="/payment"

@@ -8,6 +8,7 @@ const PaymentStatus = (props) => {
     <div>
       {transaction && (
         <>
+          <h3>Transaksi Detail</h3>
           <p>{`Id transaksi: ${data.transaction_id}`}</p>
           <p>{`Status: ${data.transaction_status}`}</p>
           <p>{`Total bayar:${data.gross_amount}`}</p>
