@@ -1,25 +1,19 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 import classes from "./styles.module.css";
 
 const Form = () => {
+  const history = useHistory();
+
   const [data, setData] = useState({
-    // customer_detail: {
     nama: "",
     email: "",
     telp: "",
     payment: "bank_transfer",
     nominal: "",
     bank: "",
-    // },
-    // bank_transfer: {
-    //   bank: "bca",
-    // },
-    // payment_type: "bank_transfer",
-    // transaction_details: {
-    //   order_id: "order-105",
-    //   gross_amount: 280000,
-    // },
   });
 
   const submitHandler = (e) => {
@@ -28,7 +22,7 @@ const Form = () => {
     const customerData = {
       payment_type: data.payment,
       transaction_details: {
-        order_id: "order-105",
+        order_id: "order-108",
         gross_amount: data.nominal,
       },
       bank_transfer: {
@@ -40,7 +34,9 @@ const Form = () => {
         phone: data.telp,
       },
     };
-    console.log(customerData);
+    axios.post("http://localhost:9000/create", customerData);
+
+    history.push("/payment");
   };
 
   const changeHanlder = (e) => {
