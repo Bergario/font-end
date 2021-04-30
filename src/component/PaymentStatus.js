@@ -7,7 +7,7 @@ const PaymentStatus = (props) => {
   return (
     <div>
       <h3>Detail Transaksi</h3>
-      {transaction && (
+      {transaction ? (
         <>
           <p>{`Id transaksi: ${data.transaction_id}`}</p>
           <p>{`Status: ${data.transaction_status}`}</p>
@@ -15,6 +15,8 @@ const PaymentStatus = (props) => {
           <p>{`Bank: ${data.va_numbers[0].bank}`}</p>
           <p>{`Virtual Account: ${data.va_numbers[0].va_number}`}</p>
         </>
+      ) : (
+        <p>Loading...</p>
       )}
     </div>
   );

@@ -6,7 +6,6 @@ import classes from "./styles.module.css";
 
 const Form = () => {
   const history = useHistory();
-
   const [data, setData] = useState({
     nama: "",
     email: "",
@@ -18,11 +17,10 @@ const Form = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(data);
+
     const customerData = {
       payment_type: data.payment,
       transaction_details: {
-        order_id: "order-108",
         gross_amount: data.nominal,
       },
       bank_transfer: {

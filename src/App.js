@@ -8,10 +8,10 @@ import PaymentStatus from "./component/PaymentStatus";
 const App = () => {
   const [transaction, setTransaction] = useState();
 
-  const cekStatus = () => {
-    fetch("http://localhost:9000/testApi")
-      .then((response) => response.json())
-      .then((response) => setTransaction(response));
+  const cekStatus = async () => {
+    const fetchData = await fetch("http://localhost:9000/testApi");
+    const response = await fetchData.json();
+    setTransaction(response);
   };
 
   useEffect(() => {
