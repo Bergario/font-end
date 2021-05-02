@@ -1,20 +1,42 @@
-import React from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import { useHistory } from "react-router-dom";
 
-const PaymentStatus = (props) => {
-  const { transaction } = props;
-  console.log(props);
-  const data = props && transaction;
+const PaymentStatus = () => {
+  const history = useHistory();
+  // const { transaction } = props;
+  // const data = props && transaction;
+  const id = history.location.state && history.location.state;
+  const [transaction, setTransaction] = useState();
+  console.log("1");
+
+  // const cekStatus = useCallback(() => {
+  //   fetch("http://localhost:9000/testApi/" + id)
+  //     .then((response) => response.json())
+  //     .then((response) => setTransaction(response))
+  //     .catch((err) => console.log(err));
+  // }, [id]);
+
+  useEffect(() => {
+    console.log("2");
+    fetch("http://localhost:9000/testApi/" + id)
+      .then((response) => response.json())
+      .then((response) => setTransaction(response))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div>
       <h3>Detail Transaksi</h3>
-      {transaction && (
+      {transaction ? (
         <>
-          <p>{`Id transaksi: ${data.transaction_id}`}</p>
-          <p>{`Status: ${data.transaction_status}`}</p>
-          <p>{`Total bayar:${data.gross_amount}`}</p>
-          <p>{`Bank: ${data.va_numbers[0].bank}`}</p>
-          <p>{`Virtual Account: ${data.va_numbers[0].va_number}`}</p>
+          <p>{`Id transaksi: ${transaction.transaction_id}`}</p>
+          <p>{`Status: ${transaction.transaction_status}`}</p>
+          <p>{`Total bayar:${transaction.gross_amount}`}</p>
+          <p>{`Bank: ${transaction.va_numbers[0].bank}`}</p>
+          <p>{`Virtual Account: ${transaction.va_numbers[0].va_number}`}</p>
         </>
+      ) : (
+        <p>Loading...</p>
       )}
     </div>
   );

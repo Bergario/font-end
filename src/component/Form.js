@@ -14,6 +14,7 @@ const Form = () => {
     payment: "bank_transfer",
     nominal: "",
     bank: "",
+    order_id: `order-${Date.now()}`,
   });
 
   const submitHandler = (e) => {
@@ -22,7 +23,7 @@ const Form = () => {
     const customerData = {
       payment_type: data.payment,
       transaction_details: {
-        order_id: "order-108",
+        order_id: data.order_id,
         gross_amount: data.nominal,
       },
       bank_transfer: {
@@ -36,7 +37,7 @@ const Form = () => {
     };
     axios.post("http://localhost:9000/create", customerData);
 
-    history.push("/payment");
+    history.push("/payment", data.order_id);
   };
 
   const changeHanlder = (e) => {

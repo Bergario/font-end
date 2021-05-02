@@ -1,34 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Switch, Route } from "react-router";
 
 import "./App.css";
+import CekStatus from "./component/CekStatus";
 import Form from "./component/Form";
 import PaymentStatus from "./component/PaymentStatus";
 
 const App = () => {
-  const [transaction, setTransaction] = useState();
-
-  const cekStatus = () => {
-    fetch("http://localhost:9000/testApi")
-      .then((response) => response.json())
-      .then((response) => setTransaction(response));
-  };
-
-  useEffect(() => {
-    cekStatus();
-  }, []);
-
-  console.log(transaction);
-
   return (
     <Switch>
       <div className="App">
         <Route path="/" exact component={Form} />
-        <Route
-          path="/payment"
-          exact
-          component={() => <PaymentStatus transaction={transaction} />}
-        />
+        <Route path="/cek" exact component={CekStatus} />
+        <Route path="/payment" exact component={PaymentStatus} />
       </div>
     </Switch>
   );
