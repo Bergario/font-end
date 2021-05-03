@@ -1,13 +1,17 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useQuery } from "react-router-dom";
 
 const PaymentStatus = () => {
   const history = useHistory();
+  const query = () => new URLSearchParams(history.location.search);
+  const q = query();
+  const id = q.get("order_id");
+
   // const { transaction } = props;
   // const data = props && transaction;
-  const id = history.location.state && history.location.state;
+  // const id = history.location.state && history.location.state;
   const [transaction, setTransaction] = useState();
-  console.log("1");
+  // console.log(query);
 
   // const cekStatus = useCallback(() => {
   //   fetch("http://localhost:9000/testApi/" + id)

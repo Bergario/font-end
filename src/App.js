@@ -8,13 +8,11 @@ import PaymentStatus from "./component/PaymentStatus";
 
 const App = () => {
   return (
-    <Switch>
-      <div className="App">
-        <Route path="/" exact component={Form} />
-        <Route path="/cek" exact component={CekStatus} />
-        <Route path="/payment" exact component={PaymentStatus} />
-      </div>
-    </Switch>
+    <div className="App">
+      <Route path="/" exact component={Form} />
+      <Route path="/cek" exact component={CekStatus} />
+      <Route path="/payment" exact component={PaymentStatus} />
+    </div>
   );
 };
 

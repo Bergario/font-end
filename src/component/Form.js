@@ -34,9 +34,14 @@ const Form = () => {
         phone: data.telp,
       },
     };
-    axios.post("http://localhost:9000/create", customerData);
+    axios.post("http://localhost:9000/snap", customerData).then((res) => {
+      console.log(res);
 
-    history.push("/payment", data.order_id);
+      const url = res.data.redirect_url;
+      history.push("/payment", data.order_id);
+      // window.location.replace(url);
+      window.open(url, "_blank");
+    });
   };
 
   const changeHanlder = (e) => {
