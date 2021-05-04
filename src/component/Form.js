@@ -34,14 +34,17 @@ const Form = () => {
         phone: data.telp,
       },
     };
-    axios.post("http://localhost:9000/snap", customerData).then((res) => {
-      console.log(res);
+    axios
+      .post("http://localhost:9000/snap", customerData)
+      .then((res) => {
+        console.log(res);
 
-      const url = res.data.redirect_url;
-      history.push("/payment", data.order_id);
-      // window.location.replace(url);
-      window.open(url, "_blank");
-    });
+        const url = res.data.redirect_url;
+        history.push("/payment", data.order_id);
+        // window.location.replace(url);
+        window.open(url, "_blank");
+      })
+      .catch((err) => console.log(err));
   };
 
   const changeHanlder = (e) => {
